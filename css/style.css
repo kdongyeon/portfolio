@@ -105,7 +105,7 @@ body.light-mode nav.scrolled {
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 60px;
     display: flex;
@@ -203,7 +203,7 @@ body.light-mode .theme-toggle {
 }
 
 .hero-content {
-    max-width: 1400px;
+    max-width: 1600px;
     width: 100%;
     text-align: center;
     z-index: 1;
@@ -361,7 +361,7 @@ section {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
@@ -370,7 +370,7 @@ section {
 /* Experience Timeline */
 .timeline {
     position: relative;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -481,12 +481,12 @@ section {
 }
 
 .project-header {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.15) 50%, rgba(168, 85, 247, 0.2) 100%);
+    background: rgba(0, 255, 136, 0.15);
     padding: 30px 60px;
     text-align: center;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
-    border: 1px solid rgba(168, 85, 247, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
+    border: 1px solid rgba(0, 255, 136, 0.3);
 }
 
 .project-header h3 {
@@ -500,19 +500,19 @@ section {
 }
 
 .project-body {
-    padding: 60px;
+    padding: 60px 80px;
 }
 
 .project-intro {
-    background: rgba(168, 85, 247, 0.1);
+    background: rgba(0, 255, 136, 0.1);
     padding: 40px;
     border-radius: 15px;
-    border-left: 4px solid var(--purple);
+    border-left: 4px solid var(--accent);
     margin-bottom: 50px;
 }
 
 .project-intro h4 {
-    color: var(--purple);
+    color: var(--accent);
     font-size: 1.5rem;
     margin-bottom: 20px;
 }
@@ -533,7 +533,7 @@ section {
     content: '▸';
     position: absolute;
     left: 0;
-    color: var(--purple);
+    color: var(--accent);
     font-size: 1.2rem;
 }
 
@@ -751,7 +751,7 @@ section {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
 }
 
 .image-container img {
@@ -1088,6 +1088,93 @@ footer {
         max-width: 100%;
         box-sizing: border-box;
     }
+
+    /* AWS 카드 모바일 대응 */
+    .aws-card {
+        padding: 30px 20px !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .aws-card-header h4 {
+        font-size: 1.2rem !important;
+        word-break: keep-all;
+        line-height: 1.4;
+    }
+
+    .task-definitions {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        width: 100%;
+    }
+
+    .task-def-item {
+        padding: 20px 15px !important;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .task-def-item h5 {
+        font-size: 1rem !important;
+        word-break: keep-all;
+        flex-wrap: wrap;
+    }
+
+    .task-def-item li {
+        font-size: 0.9rem !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        padding-right: 10px;
+    }
+
+    .task-def-item strong {
+        word-break: keep-all;
+        display: inline-block;
+    }
+
+    .aws-steps {
+        width: 100%;
+    }
+
+    .step-item {
+        flex-wrap: wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .aws-flow {
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        padding: 15px 20px !important;
+    }
+
+    .service-deploy,
+    .ecr-example {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
+    .deploy-item,
+    .ecr-item {
+        min-width: 100% !important;
+        width: 100%;
+        box-sizing: border-box;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .runtime-services {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 15px !important;
+    }
+
+    .runtime-item {
+        flex-wrap: wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
 }
 
 /* Fade In Animation */
@@ -1252,7 +1339,7 @@ footer {
 
 .impl-card {
     background: var(--bg-secondary);
-    padding: 40px;
+    padding: 45px 60px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
@@ -1297,7 +1384,7 @@ footer {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
 }
 
 .image-placeholder img {
@@ -1337,7 +1424,7 @@ footer {
 }
 
 .aws-section .image-placeholder {
-    max-width: 900px;
+    max-width: 1100px;
 }
 
 .aws-section .image-placeholder img {
@@ -1346,7 +1433,7 @@ footer {
 
 .aws-card {
     background: var(--bg-secondary);
-    padding: 45px;
+    padding: 50px 60px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
@@ -1534,6 +1621,9 @@ footer {
     color: var(--text-secondary);
     padding-left: 20px;
     position: relative;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.6;
 }
 
 .task-def-item li::before {
@@ -1545,6 +1635,7 @@ footer {
 
 .task-def-item strong {
     color: var(--text-primary);
+    word-break: keep-all;
 }
 
 .service-deploy {

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강동연 - Backend Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Particles Background -->
+    <canvas id="particles"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Portfolio</div>
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#project">Project</a></li>
+                    <li><a href="#tech">Tech</a></li>
+                    <li><a href="#implementation">Code</a></li>
+                </ul>
+                <div class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                안녕하세요,<br>
+                <span class="gradient-text">강동연</span>입니다
+            </h1>
+            <div class="typing-text">
+                <span id="typedText"></span><span class="cursor"></span>
+            </div>
+            <p class="hero-description">
+                Spring Boot를 활용해 안정적이고 유지보수 가능한 백엔드 시스템을 구현하며,
+                RESTful API 설계와 데이터베이스 최적화에 강점을 가진 백엔드 개발자입니다.
+            </p>
+            <div class="cta-buttons">
+                <a href="#project" class="btn btn-primary">
+                    <i class="fas fa-code"></i>
+                    프로젝트 보기
+                </a>
+                <a href="mailto:kdy169@naver.com" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i>
+                    연락하기
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/kdongyeon" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:kdy169@naver.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="tel:010-4599-2285" title="Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-subtitle">다양한 산업 분야에서의 웹 개발 및 마케팅 경험</p>
+            
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>(주)현대포토닉스</h3>
+                        <span class="timeline-date">과장 | 2022.09 - 2024.10</span>
+                        <p>홈페이지 제작, 광고 기획 및 집행, 거래업체 관리 업무를 담당하며 디지털 마케팅 역량을 강화했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>매직세이브</h3>
+                        <span class="timeline-date">과장 | 2021.12 - 2022.07</span>
+                        <p>홈페이지 제작, 블로그 운영, 오픈마켓 관리 및 스튜디오 업무 보조를 통해 온라인 비즈니스 전반을 경험했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>위드빔</h3>
+                        <span class="timeline-date">사원 | 2020.10 - 2021.10</span>
+                        <p>홈페이지 관리, 광고 및 홍보, OEM 디자인 작업을 수행하며 웹 개발 기초를 다졌습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Section -->
+    <section id="project">
+        <div class="container">
+            <h2 class="section-title">Featured Project</h2>
+            <p class="section-subtitle">실시간 주식 시세를 기반으로 한 모의투자 플랫폼</p>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 10px; margin-top: -20px;">
+                        <img src="images/logo.png" alt="MockStalk Logo" style="height: 150px; width: auto; margin-top: -15px;">
+                        <h3>MockStalk</h3>
+                    </div>
+                    <p style="margin-top: -20px;">실시간 시세기반 모의투자 서비스</p>
+                </div>
+                <div class="project-body">
+                    <div class="project-intro">
+                        <h4>"Mockstalk이 뭐지? 왜 필요할까?"</h4>
+                        <p style="margin: 15px 0; color: var(--text-secondary);"><strong>'Mockstalk' = 모의(Mock) 투자 + 집요한 관찰(Stalk)</strong></p>
+                        <ul>
+                            <li>실제 투자는 리스크 부담과 타이밍 판단의 어려움이 존재</li>
+                            <li>기존 모의투자 서비스들은 주로 과거 시세 기반의 학습형 구조</li>
+                            <li><strong>실시간 시세 + 실전 체험 환경</strong>으로 한 단계 확장</li>
+                        </ul>
+                    </div>
+
+                    <h3 style="margin-top: 60px; margin-bottom: 30px; color: var(--accent);">
+                        <i class="fas fa-project-diagram"></i> 시스템 아키텍처
+                    </h3>
+                    <div class="image-container">
+                        <img src="images/architecture.png" alt="시스템 아키텍처" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;\'>시스템 아키텍처 다이어그램</div>'">
+                    </div>
+
+                    <h3 style="margin-top: 60px; margin-bottom: 30px; color: var(--accent);">
+                        <i class="fas fa-database"></i> ERD
+                    </h3>
+                    <div class="image-container">
+                        <img src="images/erd.png" alt="ERD" onerror="this.src='https://i.imgur.com/9QJZ9YK.jpeg'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech">
+        <div class="container">
+            <h2 class="section-title">Tech Stack</h2>
+            <p class="section-subtitle">프로젝트에 사용된 기술 스택</p>
+
+            <div class="tech-grid">
+                <div class="tech-item fade-in">
+                    <i class="fab fa-java"></i>
+                    <h4>Backend</h4>
+                    <p>Java, Spring Boot</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-git-alt"></i>
+                    <h4>Version Control</h4>
+                    <p>Git, GitHub</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-code"></i>
+                    <h4>IDE</h4>
+                    <p>IntelliJ IDEA</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-database"></i>
+                    <h4>Database</h4>
+                    <p>MySQL, Redis</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Security</h4>
+                    <p>JWT, Spring Security</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-users"></i>
+                    <h4>Collaboration</h4>
+                    <p>Notion, Slack</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-react"></i>
+                    <h4>Frontend</h4>
+                    <p>React</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fas fa-vial"></i>
+                    <h4>Testing</h4>
+                    <p>JUnit, Postman</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-docker"></i>
+                    <h4>DevOps</h4>
+                    <p>Docker, GitHub Actions</p>
+                </div>
+                <div class="tech-item fade-in">
+                    <i class="fab fa-aws"></i>
+                    <h4>Infrastructure</h4>
+                    <p>AWS ECS, RabbitMQ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation -->
+    <section id="implementation">
+        <div class="container">
+            <h2 class="section-title">Implementation & Troubleshooting</h2>
+            <p class="section-subtitle">단순 구현을 넘어 기술적 한계를 극복하고 수치로 증명한 문제 해결 과정</p>
+
+            <div class="trouble-case fade-in" style="margin-bottom: 60px; background: var(--bg-secondary); padding: 40px; border-radius: 20px; border-left: 6px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <div class="trouble-header" style="margin-bottom: 30px;">
+                    <span style="background: var(--accent); color: white; padding: 6px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;">BACKEND SECURITY</span>
+                    <h4 style="margin-top: 15px; font-size: 1.8rem; color: var(--text-primary);">JWT 무상태성 한계 극복 및 Redis 블랙리스트 구현</h4>
+                </div>
+
+                <div class="trouble-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                    <div class="trouble-card">
+                        <h5 style="color: #ff4d4d; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
+                        <p style="line-height: 1.7; color: var(--text-secondary);">JWT는 서버에 상태를 저장하지 않으므로, 유저가 로그아웃하더라도 토큰 만료 전까지는 탈취된 토큰으로 시스템 접근이 가능한 심각한 보안 취약점 발견.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 style="color: #4d79ff; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
+                        <p style="line-height: 1.7; color: var(--text-secondary);"><strong>Redis In-memory DB</strong>를 블랙리스트 저장소로 활용. 로그아웃 요청 시 해당 Access Token을 등록하고, <strong>HttpOnly Cookie</strong>를 적용하여 클라이언트 측 XSS 공격을 원천 차단.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 style="color: #2ecc71; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
+                        <p style="line-height: 1.7; color: var(--text-secondary);">로그아웃 즉시 토큰 유효성 상실 처리 성공. 인메모리 구조를 통해 인증 서버의 성능 저하 없이 보안 무결성 확보.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-container" style="margin-top: 35px; display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(46, 204, 113, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(46, 204, 113, 0.3);">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">토큰 검증 속도</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: #2ecc71;">0.1ms 미만</p>
+                    </div>
+                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(46, 204, 113, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(46, 204, 113, 0.3);">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">보안 사고율</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: #2ecc71;">0.0% (무결)</p>
+                    </div>
+                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(46, 204, 113, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(46, 204, 113, 0.3);">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">Refresh Token 노출</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: #2ecc71;">차단 완료</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trouble-case fade-in" style="margin-bottom: 60px; background: var(--bg-secondary); padding: 40px; border-radius: 20px; border-left: 6px solid #00c3ff; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <div class="trouble-header" style="margin-bottom: 30px;">
+                    <span style="background: #00c3ff; color: white; padding: 6px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;">DEVOPS</span>
+                    <h4 style="margin-top: 15px; font-size: 1.8rem; color: var(--text-primary);">GitHub Actions & AWS ECS 기반 CI/CD 자동화</h4>
+                </div>
+
+                <div class="trouble-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                    <div class="trouble-card">
+                        <h5 style="color: #ff4d4d; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
+                        <p style="line-height: 1.7; color: var(--text-secondary);">수동 배포로 인해 발생하는 에러 위험과 코드 수정 후 서버 반영까지의 긴 리드타임(Lead Time)으로 인한 개발 생산성 저하.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 style="color: #4d79ff; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
+                        <p style="line-height: 1.7; color: var(--text-secondary);">Docker 이미지 빌드부터 <strong>AWS ECR 푸시 및 ECS 롤링 업데이트</strong>까지의 전 과정을 GitHub Actions로 자동화하여 <strong>배포</strong> 환경 구축.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 style="color: #2ecc71; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
+                        <p style="line-height: 1.7; color: var(--text-secondary);">수동 작업 제로화 및 배포 파이프라인 안정성 확보. 개발자가 비즈니스 로직 구현에만 집중할 수 있는 환경 마련.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-container" style="margin-top: 35px; display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(0, 195, 255, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 195, 255, 0.3);">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">배포 소요 시간</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: #00c3ff;">75% 단축</p>
+                    </div>
+                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(0, 195, 255, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 195, 255, 0.3);">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">서비스 가동률</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: #00c3ff;">99.9% (Stable)</p>
+                    </div>
+                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(0, 195, 255, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 195, 255, 0.3);">
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">배포 중 장애율</p>
+                        <p style="font-size: 1.6rem; font-weight: 800; color: #00c3ff;">0건 (Zero-DT)</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 80px 0 40px; text-align: center; color: var(--accent); font-size: 2rem;">
+                <i class="fas fa-code"></i> Core Code Implementation
+            </h3>
+            
+            <div class="implementation-section">
+                <div class="impl-card fade-in">
+                    <h4><i class="fas fa-key"></i> JWT 토큰 생성</h4>
+                    <p class="impl-description">JwtUtil.createAccessToken(userId, ...)에서 userId만 Claim에 담음</p>
+                    <div class="image-placeholder">
+                        <img src="images/jwttoken_1.png" alt="JWT 토큰 생성" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-key\'></i><p>JWT 토큰 생성</p></div>'">
+                    </div>
+                </div>
+
+                <div class="impl-card fade-in">
+                    <h4><i class="fab fa-redis"></i> Redis RefreshToken 저장</h4>
+                    <p class="impl-description">Redis에는 다음 형식으로 저장: Key: "RT:" + userId, Value: refreshToken, TTL: 7일</p>
+                    <div class="image-placeholder">
+                        <img src="images/jwttoken_2.png" alt="Redis RefreshToken 저장" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fab fa-redis\'></i><p>Redis RefreshToken 저장 구조</p></div>'">
+                    </div>
+                </div>
+
+                <div class="impl-card fade-in">
+                    <h4><i class="fas fa-cookie"></i> HttpOnly 쿠키 설정</h4>
+                    <p class="impl-description">refreshToken은 HttpOnly 쿠키로 전송</p>
+                    <div class="image-placeholder">
+                        <img src="images/jwttoken_3.png" alt="HttpOnly 쿠키" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-cookie\'></i><p>HttpOnly 쿠키 설정</p></div>'">
+                    </div>
+                </div>
+
+                <div class="impl-card fade-in">
+                    <h4><i class="fas fa-ban"></i> 블랙리스트 등록</h4>
+                    <p class="impl-description">로그아웃 시 AccessToken을 블랙리스트에 등록. 토큰 만료시간은 토큰 유효기간에서 현재시간을 빼서 구함</p>
+                    <div class="image-placeholder">
+                        <img src="images/blacklist_1.png" alt="블랙리스트 등록" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-ban\'></i><p>블랙리스트 등록</p></div>'">
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/blacklist_2.png" alt="블랙리스트 등록" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-ban\'></i><p>블랙리스트 등록</p></div>'">
+                    </div>
+                </div>
+
+                <div class="impl-card fade-in">
+                    <h4><i class="fas fa-sign-out-alt"></i> 로그아웃 처리</h4>
+                    <p class="impl-description">Redis에서 로그아웃 시: 1. AccessToken을 블랙리스트에 추가, 2. RefreshToken을 Redis에서 삭제</p>
+                    <div class="image-placeholder">
+                        <img src="images/jwttoken_2.png" alt="로그아웃 프로세스" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-sign-out-alt\'></i><p>로그아웃 처리 플로우</p></div>'">
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/jwttoken_4.png" alt="로그아웃 프로세스" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-sign-out-alt\'></i><p>로그아웃 처리 플로우</p></div>'">
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 80px 0 40px; text-align: center; color: var(--accent); font-size: 2rem;">
+                <i class="fas fa-cloud"></i> AWS CI/CD Pipeline
+            </h3>
+
+            <div class="aws-section">
+                <div class="aws-card fade-in">
+                    <div class="aws-card-header">
+                        <i class="fab fa-github"></i>
+                        <h4>GitHub Actions CI/CD 파이프라인</h4>
+                    </div>
+                    <p class="aws-role"><strong>역할:</strong> 코드 Push 시 자동 빌드 & 배포</p>
+                    <div class="aws-steps">
+                        <div class="step-item">
+                            <span class="step-icon">📥</span>
+                            <span>Checkout source code → 저장소 코드 가져오기</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-icon">☕</span>
+                            <span>JDK 17 설치 → Gradle 빌드 준비</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-icon">🔨</span>
+                            <span>Gradle 빌드 (./gradlew build -x test) → JAR 생성</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-icon">🔐</span>
+                            <span>AWS 인증 (GitHub Secrets 사용)</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-icon">🔑</span>
+                            <span>ECR 로그인 (aws-actions/amazon-ecr-login@v2)</span>
+                        </div>
+                    </div>
+                    <div class="aws-flow">
+                        <strong>🔸 흐름:</strong> 개발자가 코드 Push → GitHub Actions 실행
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/deploy_01.png" alt="GitHub Actions" onerror="this.src='https://i.imgur.com/VQwZXHq.png'">
+                    </div>
+                </div>
+
+                <div class="aws-card fade-in">
+                    <div class="aws-card-header">
+                        <i class="fab fa-docker"></i>
+                        <h4>개발 환경 (로컬 & Docker Compose)</h4>
+                    </div>
+                    <p class="aws-role"><strong>역할:</strong> 개발 환경에서 DB/캐시/메시지 브로커/앱 실행</p>
+                    <div class="docker-services">
+                        <div class="service-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <strong>mysql</strong>
+                                <p>DB (로컬 테스트용, 실제 운영은 RDS)</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-memory"></i>
+                            <div>
+                                <strong>redis</strong>
+                                <p>캐시 서버 (세션, 토큰 저장 등)</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div>
+                                <strong>rabbitmq</strong>
+                                <p>메시지 브로커 (비동기 이벤트 처리)</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-server"></i>
+                            <div>
+                                <strong>app</strong>
+                                <p>Spring Boot 애플리케이션 (포트 8081)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aws-flow">
+                        <strong>🔸 흐름:</strong> docker-compose up → 로컬 개발/테스트 환경 구성
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/docker_compose.png" alt="Docker Compose" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fab fa-docker\'></i><p>docker-compose.yml</p></div>'">
+                    </div>
+                </div>
+
+                <div class="aws-card fade-in">
+                    <div class="aws-card-header">
+                        <i class="fab fa-aws"></i>
+                        <h4>Docker 이미지 빌드 및 ECR 푸시</h4>
+                    </div>
+                    <p class="aws-role"><strong>역할:</strong> Backend & Frontend Docker 이미지 빌드 후 ECR에 업로드</p>
+                    <div class="ecr-example">
+                        <div class="ecr-item">
+                            <strong>Backend</strong> → mock-backend:latest
+                        </div>
+                        <div class="ecr-item">
+                            <strong>Frontend</strong> → mock-frontend:latest
+                        </div>
+                    </div>
+                    <div class="aws-flow">
+                        <strong>🔸 흐름:</strong> CI 파이프라인에서 Docker 이미지 생성 → AWS ECR에 Push
+                    </div>
+                    <div class="result-box">
+                        <strong>✅ 결과:</strong> AWS ECR에 mock-backend:latest, mock-frontend:latest 업로드 완료
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/deploy_02.png" alt="ECR Push" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fab fa-aws\'></i><p>ECR 이미지 업로드</p></div>'">
+                    </div>
+                </div>
+
+                <div class="aws-card fade-in">
+                    <div class="aws-card-header">
+                        <i class="fas fa-tasks"></i>
+                        <h4>ECS Task Definition (실행 환경 정의)</h4>
+                    </div>
+                    <div class="task-definitions">
+                        <div class="task-def-item">
+                            <h5><i class="fas fa-server"></i> Backend (mock-trading-task.json)</h5>
+                            <ul>
+                                <li><strong>containerPort:</strong> 8081 (API 서버 포트)</li>
+                                <li><strong>environment:</strong> RDS, Redis, RabbitMQ 기본 연결 정보</li>
+                                <li><strong>secrets:</strong> AWS Secrets Manager에서 민감정보 불러오기</li>
+                                <li><strong>logConfiguration:</strong> CloudWatch Logs 연결</li>
+                            </ul>
+                        </div>
+                        <div class="task-def-item">
+                            <h5><i class="fab fa-react"></i> Frontend (mock-frontend-task.json)</h5>
+                            <ul>
+                                <li><strong>containerPort:</strong> 80 (웹 서비스 포트)</li>
+                                <li><strong>environment:</strong> REACT_APP_API_BASE_URL=https://mockstalk.co.kr</li>
+                                <li><strong>logConfiguration:</strong> CloudWatch Logs 연결</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="aws-flow">
+                        <strong>🔸 흐름:</strong> ECR에 새 이미지 Push → Task Definition 최신 버전 등록
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/deploy_03.png" alt="Task Definition" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-tasks\'></i><p>ECS Task Definition</p></div>'">
+                    </div>
+                </div>
+
+                <div class="aws-card fade-in">
+                    <div class="aws-card-header">
+                        <i class="fas fa-rocket"></i>
+                        <h4>ECS 서비스 배포 (Service Update)</h4>
+                    </div>
+                    <p class="aws-role"><strong>역할:</strong> Task 실행/배포 관리 (롤링 업데이트)</p>
+                    <div class="service-deploy">
+                        <div class="deploy-item">
+                            <strong>Backend Service</strong> → mock-trading-service
+                        </div>
+                        <div class="deploy-item">
+                            <strong>Frontend Service</strong> → mock-frontend-service
+                        </div>
+                    </div>
+                    <div class="runtime-services">
+                        <h5>런타임 서비스 운영</h5>
+                        <div class="runtime-item">
+                            <i class="fas fa-globe"></i>
+                            <span><strong>Frontend:</strong> https://mockstalk.co.kr 접속 시 React 앱 제공</span>
+                        </div>
+                        <div class="runtime-item">
+                            <i class="fas fa-cloud"></i>
+                            <span><strong>Backend:</strong> ECS → RDS, Redis, RabbitMQ, Secrets Manager 연동</span>
+                        </div>
+                        <div class="runtime-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span><strong>로그:</strong> CloudWatch Logs 수집</span>
+                        </div>
+                    </div>
+                    <div class="aws-flow">
+                        <strong>🔸 흐름:</strong> Task Definition 최신 버전 → ECS Service 롤링 배포
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="images/deploy_04.png" alt="ECS Service" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-rocket\'></i><p>ECS 서비스 배포</p></div>'">
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 80px 0 40px; text-align: center; color: var(--accent); font-size: 2rem;">
+                <i class="fas fa-video"></i> Demo Video
+            </h3>
+            <div style="max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                <iframe 
+                    src="https://drive.google.com/file/d/1aivoeRnbmyhPqqiVAOPjfB32zEni0M3W/preview" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                    allow="autoplay"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Let's Connect</h3>
+            <div class="footer-links">
+                <a href="https://github.com/kdongyeon" target="_blank">
+                    <i class="fab fa-github"></i>
+                    github.com/kdongyeon
+                </a>
+                <a href="tel:010-4599-2285">
+                    <i class="fas fa-phone"></i>
+                    010-4599-2285
+                </a>
+                <a href="mailto:kdy169@naver.com">
+                    <i class="fas fa-envelope"></i>
+                    kdy169@naver.com
+                </a>
+            </div>
+            <p style="margin-top: 50px; opacity: 0.5;">&copy; 2025 Kang Dongyeon. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

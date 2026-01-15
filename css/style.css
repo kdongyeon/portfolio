@@ -1145,7 +1145,12 @@ footer {
     }
 
     .step-item {
-        flex-wrap: wrap;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+    }
+
+    .step-item span:not(.step-icon) {
+        white-space: normal;
         word-break: break-word;
         overflow-wrap: break-word;
     }
@@ -1499,6 +1504,7 @@ footer {
     border-radius: 10px;
     color: var(--text-secondary);
     transition: all 0.3s ease;
+    flex-wrap: nowrap;
 }
 
 .step-item:hover {
@@ -1509,6 +1515,16 @@ footer {
 .step-icon {
     font-size: 1.5rem;
     flex-shrink: 0;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.step-item span:not(.step-icon) {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .aws-flow {

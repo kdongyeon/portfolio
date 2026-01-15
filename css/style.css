@@ -43,6 +43,8 @@ body {
     overflow-x: hidden;
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    max-width: 100vw;
 }
 
 /* Custom Scrollbar */
@@ -361,6 +363,9 @@ section {
 .container {
     max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* Experience Timeline */
@@ -926,7 +931,92 @@ footer {
 
     .project-header,
     .project-body {
-        padding: 40px 30px;
+        padding: 40px 20px;
+    }
+
+    /* MockStalk 프로젝트 헤더 모바일 대응 */
+    .project-header > div {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .project-header img {
+        height: 100px !important;
+        margin-top: 0 !important;
+    }
+
+    .project-header h3 {
+        font-size: 2rem !important;
+        margin: 0 !important;
+    }
+
+    .project-header p {
+        font-size: 1.1rem !important;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        padding: 0 10px;
+    }
+
+    /* 프로젝트 본문 모바일 대응 */
+    .project-body {
+        padding: 30px 20px !important;
+        overflow-x: hidden;
+    }
+
+    .project-intro {
+        padding: 25px 20px !important;
+    }
+
+    .project-intro h4 {
+        font-size: 1.2rem !important;
+        word-break: keep-all;
+    }
+
+    .project-intro ul {
+        padding-left: 0;
+    }
+
+    .project-intro li {
+        font-size: 0.9rem;
+        word-break: keep-all;
+        line-height: 1.6;
+    }
+
+    /* 이미지 컨테이너 모바일 대응 */
+    .image-container {
+        margin: 30px 0 !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .image-container img {
+        max-width: 100% !important;
+        height: auto;
+    }
+
+    /* 트러블슈팅 섹션 모바일 대응 */
+    .trouble-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .trouble-case {
+        padding: 25px 20px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .trouble-header h4 {
+        font-size: 1.3rem !important;
+        word-break: keep-all;
+    }
+
+    .metrics-container {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .metric-card {
+        min-width: 100% !important;
     }
 }
 

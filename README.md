@@ -11,6 +11,7 @@ Spring Boot를 활용해 안정적이고 유지보수 가능한 백엔드 시스
 실시간 주식 시세를 기반으로 한 모의투자 플랫폼
 
 ### 프로젝트 개요
+
 - **MockStalk** = 모의(Mock) 투자 + 집요한 관찰(Stalk)
 - 실시간 시세 + 실전 체험 환경을 제공하는 모의투자 서비스
 - 기존 모의투자 서비스의 과거 시세 기반 학습형 구조를 한 단계 확장
@@ -69,11 +70,17 @@ Spring Boot를 활용해 안정적이고 유지보수 가능한 백엔드 시스
 - 서비스 가동률: 99.9% (Stable)
 - 배포 중 장애율: 0건 (Zero-DT)
 
-배포
+
+## 배포
+
 현재 GitHub Pages 또는 정적 호스팅 서비스를 통해 배포 가능합니다.
-연락처
-이메일: kdy169@naver.com
-전화: 010-4599-2285
-GitHub: github.com/kdongyeon
-라이선스
+
+## 연락처
+
+- **이메일:** kdy169@naver.com
+- **전화:** 010-4599-2285
+- **GitHub:** [github.com/kdongyeon](https://github.com/kdongyeon)
+
+## 라이선스
+
 © 2025 Kang Dongyeon. All rights reserved.

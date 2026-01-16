@@ -81,7 +81,6 @@ Spring Boot를 활용한 안정적이고 유지보수 가능한 백엔드 시스
 
 - **GitHub**: [github.com/kdongyeon](https://github.com/kdongyeon)
 - **Email**: kdy169@naver.com
-- **Phone**: 010-4599-2285
 
 ## 📝 라이선스
 

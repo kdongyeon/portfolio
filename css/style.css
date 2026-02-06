@@ -251,10 +251,12 @@ body.light-mode .token.type {
 
     /* AWS 스텝 아이템 모바일 최적화 */
     .step-item {
-        flex-wrap: wrap !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
         align-items: center !important;
         gap: 8px !important;
         padding: 12px 15px !important;
+        min-height: 40px !important;
     }
 
     .step-item span:not(.step-icon) {
@@ -264,13 +266,58 @@ body.light-mode .token.type {
         overflow: visible !important;
         text-overflow: clip !important;
         font-size: 0.85rem !important;
-        flex-basis: calc(100% - 30px) !important;
+        flex: 1 !important;
+        line-height: 1.4 !important;
+        vertical-align: center !important;
     }
 
     .step-icon {
         flex-shrink: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+        font-size: 1.5rem !important;
+        display: inline-block !important;
+        width: auto !important;
+    }
+
+    /* Hero 섹션 모바일 여백 추가 */
+    .hero {
+        min-height: 100vh !important;
+        padding: 0 10px !important;
         margin-top: 0 !important;
-        align-self: flex-start !important;
-        padding-top: 2px;
+    }
+
+    .hero-content {
+        margin-top: 80px !important;
+    }
+
+    .hero-title {
+        margin-top: 0 !important;
+    }
+}
+
+/* 비디오 컨테이너 반응형 */
+.video-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 400px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    background: #000;
+}
+
+@media (max-width: 640px) {
+    .video-container {
+        max-width: calc(100% - 30px) !important;
+        margin: 0 15px !important;
+        aspect-ratio: 16 / 9 !important;
+        margin-bottom: 30px !important;
+        min-height: 280px !important;
     }
 }

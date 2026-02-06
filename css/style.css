@@ -233,3 +233,44 @@ body.light-mode .token.plain {
 body.light-mode .token.type {
     color: #d46a2c !important;
 }
+
+/* 모바일 코드 블록 최적화 */
+@media (max-width: 640px) {
+    pre {
+        padding: 15px 12px !important;
+        font-size: 0.75rem !important;
+        line-height: 1.5 !important;
+        margin: 20px 0 !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    code {
+        font-size: 0.75rem !important;
+    }
+
+    /* AWS 스텝 아이템 모바일 최적화 */
+    .step-item {
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 12px 15px !important;
+    }
+
+    .step-item span:not(.step-icon) {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        font-size: 0.85rem !important;
+        flex-basis: calc(100% - 30px) !important;
+    }
+
+    .step-icon {
+        flex-shrink: 0 !important;
+        margin-top: 0 !important;
+        align-self: flex-start !important;
+        padding-top: 2px;
+    }
+}

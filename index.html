@@ -6,6 +6,8 @@
     <title>강동연 - Backend Developer Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Prism.js 문법 강조 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dracula.min.css">
 </head>
 <body>
     <!-- Particles Background -->
@@ -311,51 +313,82 @@
                 <i class="fas fa-code"></i> Core Code Implementation
             </h3>
             
+
             <div class="implementation-section">
                 <div class="impl-card fade-in">
                     <h4><i class="fas fa-key"></i> JWT 토큰 생성</h4>
                     <p class="impl-description">JwtUtil.createAccessToken(userId, ...)에서 userId만 Claim에 담음</p>
-                    <div class="image-placeholder">
-                        <img src="images/jwttoken_1.png" alt="JWT 토큰 생성" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-key\'></i><p>JWT 토큰 생성</p></div>'">
-                    </div>
+                    <pre><code class="language-java">// Access Token 생성
+public String createToken(Long userId) {
+    Date date = new Date();
+    return BEARER_PREFIX +
+            Jwts.builder()
+            .setSubject(String.valueOf(userId))
+            .claim("tokenType", "access")
+            .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+            .setIssuedAt(date) // 발급일
+            .signWith(secretKey, signatureAlgorithm) // 암호화 알고리즘
+            .compact();
+}</code></pre>
                 </div>
 
                 <div class="impl-card fade-in">
                     <h4><i class="fab fa-redis"></i> Redis RefreshToken 저장</h4>
                     <p class="impl-description">Redis에는 다음 형식으로 저장: Key: "RT:" + userId, Value: refreshToken, TTL: 7일</p>
-                    <div class="image-placeholder">
-                        <img src="images/jwttoken_2.png" alt="Redis RefreshToken 저장" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fab fa-redis\'></i><p>Redis RefreshToken 저장 구조</p></div>'">
-                    </div>
+                    <pre><code class="language-java">// RefreshToken 저장
+public void storeRefreshToken(Long userId, String refreshToken) {
+    String tokenToStore = jwtUtil.substringToken(refreshToken);
+
+    redisTemplate.opsForValue().set(
+        "RT:" + userId,
+        tokenToStore,
+        Duration.ofDays(14)
+    );
+}</code></pre>
                 </div>
 
                 <div class="impl-card fade-in">
                     <h4><i class="fas fa-cookie"></i> HttpOnly 쿠키 설정</h4>
                     <p class="impl-description">refreshToken은 HttpOnly 쿠키로 전송</p>
-                    <div class="image-placeholder">
-                        <img src="images/jwttoken_3.png" alt="HttpOnly 쿠키" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-cookie\'></i><p>HttpOnly 쿠키 설정</p></div>'">
-                    </div>
+                    <pre><code class="language-java">// Refresh Token을 HttpOnly 쿠키로 설정
+ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", refreshToken)
+    .httpOnly(true)
+    .secure(false) // HTTPS 환경일 경우 true
+    .path("/")
+    .maxAge(Duration.ofDays(14))
+    .build();</code></pre>
                 </div>
 
                 <div class="impl-card fade-in">
                     <h4><i class="fas fa-ban"></i> 블랙리스트 등록</h4>
                     <p class="impl-description">로그아웃 시 AccessToken을 블랙리스트에 등록. 토큰 만료시간은 토큰 유효기간에서 현재시간을 빼서 구함</p>
-                    <div class="image-placeholder">
-                        <img src="images/blacklist_1.png" alt="블랙리스트 등록" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-ban\'></i><p>블랙리스트 등록</p></div>'">
-                    </div>
-                    <div class="image-placeholder">
-                        <img src="images/blacklist_2.png" alt="블랙리스트 등록" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-ban\'></i><p>블랙리스트 등록</p></div>'">
-                    </div>
+                    <pre><code class="language-java">// 로그아웃 처리
+public void logout(String accessToken, Long userId) {
+
+    // 1. AccessToken의 남은 유효시간 계산
+    // 이시간 동안 블랙리스트 유지
+    long expiration = jwtUtil.getRemainTime(accessToken);
+
+    // 2. AccessToken 블랙리스트 등록
+    tokenService.blacklistAccessToken(accessToken, expiration);
+
+    // 3. RefreshToken 명시적 삭제
+    tokenService.deleteRefreshToken(userId);
+}</code></pre>
+                    <pre><code class="language-java">// 토큰 만료시간 계산
+public long getRemainTime(String token) {
+    Date expiration = extractClaims(token).getExpiration();
+    return expiration.getTime() - System.currentTimeMillis();
+}</code></pre>
                 </div>
 
                 <div class="impl-card fade-in">
                     <h4><i class="fas fa-sign-out-alt"></i> 로그아웃 처리</h4>
                     <p class="impl-description">Redis에서 로그아웃 시: 1. AccessToken을 블랙리스트에 추가, 2. RefreshToken을 Redis에서 삭제</p>
-                    <div class="image-placeholder">
-                        <img src="images/jwttoken_2.png" alt="로그아웃 프로세스" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-sign-out-alt\'></i><p>로그아웃 처리 플로우</p></div>'">
-                    </div>
-                    <div class="image-placeholder">
-                        <img src="images/jwttoken_4.png" alt="로그아웃 프로세스" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-sign-out-alt\'></i><p>로그아웃 처리 플로우</p></div>'">
-                    </div>
+                    <pre><code class="language-java">// RefreshToken 삭제
+public void deleteRefreshToken(Long userId) {
+    redisTemplate.delete("RT:" + userId);
+}</code></pre>
                 </div>
             </div>
 
@@ -395,9 +428,38 @@
                     <div class="aws-flow">
                         <strong>🔸 흐름:</strong> 개발자가 코드 Push → GitHub Actions 실행
                     </div>
-                    <div class="image-placeholder">
-                        <img src="images/deploy_01.png" alt="GitHub Actions" onerror="this.src='https://i.imgur.com/VQwZXHq.png'">
-                    </div>
+                    <pre><code class="language-yaml">name: Deploy Frontend & Backend to AWS ECS
+
+on:
+  push:
+    branches: [ dev ]  # dev 브랜치에 push 될 때 자동 실행
+  workflow_dispatch:   # GitHub Actions에서 수동 실행도 가능
+
+env:
+  AWS_REGION: ap-northeast-2  # AWS 리전
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # GitHub Actions 실행 환경 (리눅스)
+
+    steps:
+      # ① Checkout source code → 저장소 코드 가져오기
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      # ② JDK 17 설치 → Gradle 빌드 준비
+      - name: Set up JDK 17 (for backend)
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # ③ Gradle 빌드 (테스트 제외) → JAR 생성
+      - name: Build backend JAR
+        run: ./gradlew build -x test
+
+      # ④ AWS 인증 (GitHub Secrets 사용)
+      # ⑤ ECR 로그인 (aws-actions/amazon-ecr-login@v2)</code></pre>
                 </div>
 
                 <div class="aws-card fade-in">
@@ -439,9 +501,48 @@
                     <div class="aws-flow">
                         <strong>🔸 흐름:</strong> docker-compose up → 로컬 개발/테스트 환경 구성
                     </div>
-                    <div class="image-placeholder">
-                        <img src="images/docker_compose.png" alt="Docker Compose" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fab fa-docker\'></i><p>docker-compose.yml</p></div>'">
-                    </div>
+                    <pre><code class="language-yaml">version: '3.8'  # Compose 파일 버전
+
+services:
+  # ✅ MySQL (DB, 로컬 테스트용 - 운영에서는 RDS 사용)
+  mysql:
+    image: mysql:8.0  # MySQL 8.0 이미지 사용
+    container_name: mockstalk-mysql  # 컨테이너 이름
+    environment:  # 환경 변수
+      MYSQL_DATABASE: mockstalk
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ${DB_USERNAME}    # .env에서 불러오는 DB 사용자
+      MYSQL_PASSWORD: ${DB_PASSWORD} # .env에서 불러오는 DB 비밀번호
+    ports:
+      - "3306:3306"  # 호스트:컨테이너 포트
+    volumes:
+      - mysql-data:/var/lib/mysql  # 데이터 지속성을 위한 볼륨
+
+  networks:
+    - mockstalk-net
+
+  # ✅ Redis (캐시 서버 → 세션, 토큰 저장 등에 활용)
+  redis:
+    image: redis:7
+    container_name: mockstalk-redis
+    ports:
+      - "6379:6379"
+
+    networks:
+      - mockstalk-net
+
+  # ✅ RabbitMQ (메시지 브로커 → 비동기 이벤트 처리)
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: mockstalk-rabbitmq
+    ports:
+      - "5672:5672"      # AMQP 포트
+      - "15672:15672"    # Management UI 포트
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - mockstalk-net</code></pre>
                 </div>
 
                 <div class="aws-card fade-in">
@@ -464,9 +565,32 @@
                     <div class="result-box">
                         <strong>✅ 결과:</strong> AWS ECR에 mock-backend:latest, mock-frontend:latest 업로드 완료
                     </div>
-                    <div class="image-placeholder">
-                        <img src="images/deploy_02.png" alt="ECR Push" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fab fa-aws\'></i><p>ECR 이미지 업로드</p></div>'">
-                    </div>
+                    <pre><code class="language-yaml"># ④ AWS 인증 (GitHub Secrets 사용)
+  - name: Configure AWS credentials
+    uses: aws-actions/configure-aws-credentials@v4
+    with:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws-region: ${{ env.AWS_REGION }}
+
+# ⑤ ECR 로그인 (amazon-ecr-login@v2)
+  - name: Login to Amazon ECR
+    uses: aws-actions/amazon-ecr-login@v2</code></pre>
+                    <pre><code class="language-bash"># --- Backend Build & Push ---
+  - name: Build and push backend Docker image
+    run: |
+      docker buildx build --platform linux/amd64 \
+        -f Dockerfile \
+        -t $BACKEND_ECR:latest .
+      docker push $BACKEND_ECR:latest
+
+# --- Frontend Build & Push ---
+  - name: Build and push frontend Docker image
+    run: |
+      docker buildx build --platform linux/amd64 \
+        -f candle-chart-frontend/Dockerfile \
+        -t $FRONTEND_ECR:latest ./candle-chart-frontend
+      docker push $FRONTEND_ECR:latest</code></pre>
                 </div>
 
                 <div class="aws-card fade-in">
@@ -496,9 +620,21 @@
                     <div class="aws-flow">
                         <strong>🔸 흐름:</strong> ECR에 새 이미지 Push → Task Definition 최신 버전 등록
                     </div>
-                    <div class="image-placeholder">
-                        <img src="images/deploy_03.png" alt="Task Definition" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-tasks\'></i><p>ECS Task Definition</p></div>'">
-                    </div>
+                    <pre><code class="language-yaml"># --- Deploy backend to ECS ---
+  - name: Deploy backend
+    uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+    with:
+      service: ${{ env.BACKEND_SERVICE }}
+      cluster: ${{ env.BACKEND_CLUSTER }}
+      task-definition: ${{ steps.render-backend.outputs.task-definition }}
+
+# --- Deploy frontend to ECS ---
+  - name: Deploy frontend
+    uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+    with:
+      service: ${{ env.FRONTEND_SERVICE }}
+      cluster: ${{ env.FRONTEND_CLUSTER }}
+      task-definition: ${{ steps.render-frontend.outputs.task-definition }}</code></pre>
                 </div>
 
                 <div class="aws-card fade-in">
@@ -533,9 +669,21 @@
                     <div class="aws-flow">
                         <strong>🔸 흐름:</strong> Task Definition 최신 버전 → ECS Service 롤링 배포
                     </div>
-                    <div class="image-placeholder">
-                        <img src="images/deploy_04.png" alt="ECS Service" onerror="this.parentElement.innerHTML='<div class=\'placeholder-box\'><i class=\'fas fa-rocket\'></i><p>ECS 서비스 배포</p></div>'">
-                    </div>
+                    <pre><code class="language-yaml"># --- Backend ECS 롤링 배포 ---
+  - name: Backend rolling deployment
+    run: |
+      aws ecs update-service \
+        --cluster $BACKEND_CLUSTER \
+        --service $BACKEND_SERVICE \
+        --force-new-deployment
+
+# --- Frontend ECS 롤링 배포 ---
+  - name: Frontend rolling deployment
+    run: |
+      aws ecs update-service \
+        --cluster $FRONTEND_CLUSTER \
+        --service $FRONTEND_SERVICE \
+        --force-new-deployment</code></pre>
                 </div>
             </div>
 
@@ -552,6 +700,12 @@
             </div>
         </div>
     </section>
+
+    <!-- Prism.js 스크립트 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
     <!-- Footer -->
     <footer>

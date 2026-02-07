@@ -2214,13 +2214,13 @@ body.light-mode .token.type {
     /* 모바일 이미지 컨테이너 확대 */
     .image-container {
         margin: 40px auto !important;
-        min-height: 500px !important;
+        min-height: 700px !important;
     }
 
     .image-container img {
         width: auto !important;
         max-width: 100% !important;
-        max-height: 600px !important;
+        max-height: 800px !important;
     }
 }
 
@@ -2330,18 +2330,33 @@ body.light-mode .token.type {
     color: var(--error-red);
     font-size: 1.15rem;
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    line-height: 1.2;
 }
 
 .trouble-card-title-strategy {
     color: var(--info-blue);
     font-size: 1.15rem;
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    line-height: 1.2;
 }
 
 .trouble-card-title-result {
     color: var(--success-green);
     font-size: 1.15rem;
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    line-height: 1.2;
 }
 
 .metrics-container {

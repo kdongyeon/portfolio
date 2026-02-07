@@ -343,6 +343,18 @@ body.light-mode .token.type {
         word-break: break-word !important;
         white-space: normal !important;
     }
+
+    /* 모바일 이미지 컨테이너 확대 */
+    .image-container {
+        margin: 40px auto !important;
+        min-height: 350px !important;
+    }
+
+    .image-container img {
+        width: auto !important;
+        max-width: 90% !important;
+        max-height: 400px !important;
+    }
 }
 
 /* Color Variables */

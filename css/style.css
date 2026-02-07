@@ -2215,12 +2215,15 @@ body.light-mode .token.type {
     .image-container {
         margin: 40px auto !important;
         min-height: 700px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     .image-container img {
-        width: auto !important;
-        max-width: 100% !important;
-        max-height: 800px !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
     }
 }
 

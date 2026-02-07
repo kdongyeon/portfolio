@@ -133,16 +133,16 @@
 
             <div class="project-card fade-in">
                 <div class="project-header">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 10px; margin-top: -20px;">
-                        <img src="images/logo.png" alt="MockStalk Logo" style="height: 150px; width: auto; margin-top: -15px;">
+                    <div class="project-header-flex">
+                        <img src="images/logo.png" alt="MockStalk Logo" class="project-logo-img">
                         <h3>MockStalk</h3>
                     </div>
-                    <p style="margin-top: -20px;">실시간 시세기반 모의투자 서비스</p>
+                    <p class="project-subtitle">실시간 시세기반 모의투자 서비스</p>
                 </div>
                 <div class="project-body">
                     <div class="project-intro">
                         <h4>"Mockstalk이 뭐지? 왜 필요할까?"</h4>
-                        <p style="margin: 15px 0; color: var(--text-secondary);"><strong>'Mockstalk' = 모의(Mock) 투자 + 집요한 관찰(Stalk)</strong></p>
+                        <p class="project-intro-text"><span class="project-intro-bold">'Mockstalk' = 모의(Mock) 투자 + 집요한 관찰(Stalk)</span></p>
                         <ul>
                             <li>실제 투자는 리스크 부담과 타이밍 판단의 어려움이 존재</li>
                             <li>기존 모의투자 서비스들은 주로 과거 시세 기반의 학습형 구조</li>
@@ -150,14 +150,14 @@
                         </ul>
                     </div>
 
-                    <h3 style="margin-top: 60px; margin-bottom: 30px; color: var(--accent);">
+                    <h3 class="section-title-implementation">
                         <i class="fas fa-project-diagram"></i> 시스템 아키텍처
                     </h3>
                     <div class="image-container">
                         <img src="images/architecture.png" alt="시스템 아키텍처" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;\'>시스템 아키텍처 다이어그램</div>'">
                     </div>
 
-                    <h3 style="margin-top: 60px; margin-bottom: 30px; color: var(--accent);">
+                    <h3 class="section-title-implementation">
                         <i class="fas fa-database"></i> ERD
                     </h3>
                     <div class="image-container">
@@ -235,81 +235,81 @@
             <h2 class="section-title">Implementation & Troubleshooting</h2>
             <p class="section-subtitle">기술적 도전과 문제 해결 과정</p>
 
-            <div class="trouble-case fade-in" style="margin-bottom: 60px; background: var(--bg-secondary); padding: 40px; border-radius: 20px; border-left: 6px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <div class="trouble-header" style="margin-bottom: 30px;">
-                    <span style="background: var(--accent); color: white; padding: 6px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;">BACKEND SECURITY</span>
-                    <h4 style="margin-top: 15px; font-size: 1.8rem; color: var(--text-primary);">JWT 무상태성 한계 극복 및 Redis 블랙리스트 구현</h4>
+            <div class="trouble-case-security fade-in">
+                <div class="trouble-header">
+                    <span class="trouble-header-badge">BACKEND SECURITY</span>
+                    <h4 class="trouble-header-title">JWT 무상태성 한계 극복 및 Redis 블랙리스트 구현</h4>
                 </div>
 
-                <div class="trouble-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                <div class="trouble-grid">
                     <div class="trouble-card">
-                        <h5 style="color: #ff4d4d; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
-                        <p style="line-height: 1.7; color: var(--text-secondary);">JWT는 서버에 상태를 저장하지 않으므로, 유저가 로그아웃하더라도 토큰 만료 전까지는 탈취된 토큰으로 시스템 접근이 가능한 심각한 보안 취약점 발견.</p>
-                    </div>
-                    <div class="trouble-card">
-                        <h5 style="color: #4d79ff; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
-                        <p style="line-height: 1.7; color: var(--text-secondary);"><strong>Redis In-memory DB</strong>를 블랙리스트 저장소로 활용. 로그아웃 요청 시 해당 Access Token을 등록하고, <strong>HttpOnly Cookie</strong>를 적용하여 클라이언트 측 XSS 공격을 원천 차단.</p>
+                        <h5 class="trouble-card-title-problem"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
+                        <p class="impl-description-text">JWT는 서버에 상태를 저장하지 않으므로, 유저가 로그아웃하더라도 토큰 만료 전까지는 탈취된 토큰으로 시스템 접근이 가능한 심각한 보안 취약점 발견.</p>
                     </div>
                     <div class="trouble-card">
-                        <h5 style="color: #2ecc71; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
-                        <p style="line-height: 1.7; color: var(--text-secondary);">로그아웃 즉시 토큰 유효성 상실 처리 성공. 인메모리 구조를 통해 인증 서버의 성능 저하 없이 보안 무결성 확보.</p>
-                    </div>
-                </div>
-
-                <div class="metrics-container" style="margin-top: 35px; display: flex; gap: 20px; flex-wrap: wrap;">
-                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(46, 204, 113, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(46, 204, 113, 0.3);">
-                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">토큰 검증 속도</p>
-                        <p style="font-size: 1.6rem; font-weight: 800; color: #2ecc71;">0.1ms 미만</p>
-                    </div>
-                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(46, 204, 113, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(46, 204, 113, 0.3);">
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">보안 사고율</p>
-                        <p style="font-size: 1.6rem; font-weight: 800; color: #2ecc71;">0.0% (무결)</p>
-                    </div>
-                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(46, 204, 113, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(46, 204, 113, 0.3);">
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">Refresh Token 노출</p>
-                        <p style="font-size: 1.6rem; font-weight: 800; color: #2ecc71;">차단 완료</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="trouble-case fade-in" style="margin-bottom: 60px; background: var(--bg-secondary); padding: 40px; border-radius: 20px; border-left: 6px solid #00c3ff; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <div class="trouble-header" style="margin-bottom: 30px;">
-                    <span style="background: #00c3ff; color: white; padding: 6px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;">DEVOPS</span>
-                    <h4 style="margin-top: 15px; font-size: 1.8rem; color: var(--text-primary);">GitHub Actions & AWS ECS 기반 CI/CD 자동화</h4>
-                </div>
-
-                <div class="trouble-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
-                    <div class="trouble-card">
-                        <h5 style="color: #ff4d4d; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
-                        <p style="line-height: 1.7; color: var(--text-secondary);">수동 배포로 인해 발생하는 에러 위험과 코드 수정 후 서버 반영까지의 긴 리드타임(Lead Time)으로 인한 개발 생산성 저하.</p>
+                        <h5 class="trouble-card-title-strategy"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
+                        <p class="impl-description-text"><strong>Redis In-memory DB</strong>를 블랙리스트 저장소로 활용. 로그아웃 요청 시 해당 Access Token을 등록하고, <strong>HttpOnly Cookie</strong>를 적용하여 클라이언트 측 XSS 공격을 원천 차단.</p>
                     </div>
                     <div class="trouble-card">
-                        <h5 style="color: #4d79ff; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
-                        <p style="line-height: 1.7; color: var(--text-secondary);">Docker 이미지 빌드부터 <strong>AWS ECR 푸시 및 ECS 롤링 업데이트</strong>까지의 전 과정을 GitHub Actions로 자동화하여 <strong>배포</strong> 환경 구축.</p>
-                    </div>
-                    <div class="trouble-card">
-                        <h5 style="color: #2ecc71; font-size: 1.15rem; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
-                        <p style="line-height: 1.7; color: var(--text-secondary);">수동 작업 제로화 및 배포 파이프라인 안정성 확보. 개발자가 비즈니스 로직 구현에만 집중할 수 있는 환경 마련.</p>
+                        <h5 class="trouble-card-title-result"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
+                        <p class="impl-description-text">로그아웃 즉시 토큰 유효성 상실 처리 성공. 인메모리 구조를 통해 인증 서버의 성능 저하 없이 보안 무결성 확보.</p>
                     </div>
                 </div>
 
-                <div class="metrics-container" style="margin-top: 35px; display: flex; gap: 20px; flex-wrap: wrap;">
-                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(0, 195, 255, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 195, 255, 0.3);">
-                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">배포 소요 시간</p>
-                        <p style="font-size: 1.6rem; font-weight: 800; color: #00c3ff;">75% 단축</p>
+                <div class="metrics-container">
+                    <div class="metric-card-success">
+                        <p class="metric-label">토큰 검증 속도</p>
+                        <p class="metric-value-success">0.1ms 미만</p>
                     </div>
-                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(0, 195, 255, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 195, 255, 0.3);">
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">서비스 가동률</p>
-                        <p style="font-size: 1.6rem; font-weight: 800; color: #00c3ff;">99.9% (Stable)</p>
+                    <div class="metric-card-success">
+                        <p class="metric-label">보안 사고율</p>
+                        <p class="metric-value-success">0.0% (무결)</p>
                     </div>
-                    <div class="metric-card" style="flex: 1; min-width: 150px; background: rgba(0, 195, 255, 0.1); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 195, 255, 0.3);">
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">배포 중 장애율</p>
-                        <p style="font-size: 1.6rem; font-weight: 800; color: #00c3ff;">0건 (Zero-DT)</p>
+                    <div class="metric-card-success">
+                        <p class="metric-label">Refresh Token 노출</p>
+                        <p class="metric-value-success">차단 완료</p>
                     </div>
                 </div>
             </div>
 
-            <h3 style="margin: 80px 0 40px; text-align: center; color: var(--accent); font-size: 2rem;">
+            <div class="trouble-case-devops fade-in">
+                <div class="trouble-header">
+                    <span class="trouble-header-badge-devops">DEVOPS</span>
+                    <h4 class="trouble-header-title">GitHub Actions & AWS ECS 기반 CI/CD 자동화</h4>
+                </div>
+
+                <div class="trouble-grid">
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-problem"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
+                        <p class="impl-description-text">수동 배포로 인해 발생하는 에러 위험과 코드 수정 후 서버 반영까지의 긴 리드타임(Lead Time)으로 인한 개발 생산성 저하.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-strategy"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
+                        <p class="impl-description-text">Docker 이미지 빌드부터 <strong>AWS ECR 푸시 및 ECS 롤링 업데이트</strong>까지의 전 과정을 GitHub Actions로 자동화하여 <strong>배포</strong> 환경 구축.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-result"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
+                        <p class="impl-description-text">수동 작업 제로화 및 배포 파이프라인 안정성 확보. 개발자가 비즈니스 로직 구현에만 집중할 수 있는 환경 마련.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-container">
+                    <div class="metric-card-info">
+                        <p class="metric-label">배포 소요 시간</p>
+                        <p class="metric-value-info">75% 단축</p>
+                    </div>
+                    <div class="metric-card-info">
+                        <p class="metric-label">서비스 가동률</p>
+                        <p class="metric-value-info">99.9% (Stable)</p>
+                    </div>
+                    <div class="metric-card-info">
+                        <p class="metric-label">배포 중 장애율</p>
+                        <p class="metric-value-info">0건 (Zero-DT)</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title-implementation">
                 <i class="fas fa-code"></i> Core Code Implementation
             </h3>
             
@@ -392,7 +392,7 @@ public void deleteRefreshToken(Long userId) {
                 </div>
             </div>
 
-            <h3 style="margin: 80px 0 40px; text-align: center; color: var(--accent); font-size: 2rem;">
+            <h3 class="section-title-aws">
                 <i class="fas fa-cloud"></i> AWS CI/CD Pipeline
             </h3>
 
@@ -687,7 +687,7 @@ services:
                 </div>
             </div>
 
-            <h3 style="margin: 80px 0 40px; text-align: center; color: var(--accent); font-size: 2rem;">
+            <h3 class="section-title-aws">
                 <i class="fas fa-video"></i> Demo Video
             </h3>
             <div class="video-container">

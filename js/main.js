@@ -134,13 +134,14 @@ mobileToggle.addEventListener('click', () => {
     icon.classList.toggle('fa-times');
 });
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
+// Event delegation for nav links - optimized
+navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
         navLinks.classList.remove('active');
         const icon = mobileToggle.querySelector('i');
         icon.classList.add('fa-bars');
         icon.classList.remove('fa-times');
-    });
+    }
 });
 
 // Smooth Scroll

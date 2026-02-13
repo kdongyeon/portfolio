@@ -275,7 +275,7 @@
             <div class="trouble-case-database fade-in">
                 <div class="trouble-header">
                     <span class="trouble-header-badge-database">DATABASE OPTIMIZATION</span>
-                    <h4 class="trouble-header-title">N+1 문제 해결 (@EntityGraph / JPQL JOIN FETCH)</h4>
+                    <h4 class="trouble-header-title">N+1 문제 해결 (JPQL JOIN FETCH)</h4>
                 </div>
 
                 <div class="trouble-grid">
@@ -285,7 +285,7 @@
                     </div>
                     <div class="trouble-card">
                         <h5 class="trouble-card-title-strategy"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
-                        <p class="impl-description-text"><strong>@EntityGraph</strong> 어노테이션을 사용하여 Repository 메서드에 원하는 연관 엔티티를 명시. JPA가 자동으로 한 번의 쿼리에 관련 데이터를 함께 로드하여 불필요한 추가 쿼리 제거.</p>
+                        <p class="impl-description-text"><strong>JPQL JOIN FETCH</strong>를 사용하여 한 번의 쿼리에 User와 관련된 모든 엔티티를 함께 조회. LEFT JOIN FETCH로 필요한 관계를 명시하여 불필요한 추가 쿼리 제거.</p>
                     </div>
                     <div class="trouble-card">
                         <h5 class="trouble-card-title-result"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
@@ -303,8 +303,8 @@
                         <p class="metric-value-database">약 70% 개선</p>
                     </div>
                     <div class="metric-card-database">
-                        <p class="metric-label">구현난이도</p>
-                        <p class="metric-value-database">쉬움</p>
+                        <p class="metric-label">메모리 효율</p>
+                        <p class="metric-value-database">최적화 완료</p>
                     </div>
                 </div>
             </div>
@@ -396,13 +396,16 @@
 
             <div class="implementation-section">
                 <div class="impl-card fade-in">
-                    <h4><i class="fas fa-database"></i> N+1 해결 - @EntityGraph</h4>
-                    <p class="impl-description">@EntityGraph 어노테이션으로 한 번의 쿼리에 관련 엔티티를 함께 로드</p>
-                    <pre><code class="language-java">// Repository에 @EntityGraph 추가
+                    <h4><i class="fas fa-database"></i> N+1 해결 - JPQL JOIN FETCH</h4>
+                    <p class="impl-description">JPQL의 JOIN FETCH를 사용하여 한 번의 쿼리에 관련 엔티티를 함께 로드</p>
+                    <pre><code class="language-java">// Repository에 JPQL JOIN FETCH 쿼리 작성
 @Repository
 public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
-    @EntityGraph(attributePaths = {"accounts", "comments"})
-    Optional&lt;User&gt; findByIdWithRelations(Long userId);
+    @Query("SELECT DISTINCT u FROM User u " +
+           "LEFT JOIN FETCH u.accounts " +
+           "LEFT JOIN FETCH u.comments " +
+           "WHERE u.id = :userId")
+    Optional&lt;User&gt; findByIdWithRelations(@Param("userId") Long userId);
 }
 
 // Service에서 사용
@@ -418,10 +421,11 @@ public class UserService {
     }
 }
 
-// 사용 예시
-// userId로 조회하면 @EntityGraph가 자동으로
-// User + accounts + comments를 한 번의 쿼리로 로드
-User user = userService.getUserWithRelations(1L);</code></pre>
+// 결과: User + accounts + comments를 한 번의 쿼리로 조회
+// SQL: SELECT DISTINCT u.*, a.*, c.* FROM user u
+//      LEFT JOIN account a ON u.id = a.user_id
+//      LEFT JOIN comment c ON u.id = c.user_id
+//      WHERE u.id = ?</code></pre>
                 </div>
 
                 <div class="impl-card fade-in">

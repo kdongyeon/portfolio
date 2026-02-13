@@ -272,6 +272,86 @@
                 </div>
             </div>
 
+            <div class="trouble-case-database fade-in">
+                <div class="trouble-header">
+                    <span class="trouble-header-badge-database">DATABASE OPTIMIZATION</span>
+                    <h4 class="trouble-header-title">N+1 문제 해결 (@EntityGraph / JPQL JOIN FETCH)</h4>
+                </div>
+
+                <div class="trouble-grid">
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-problem"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
+                        <p class="impl-description-text">User Entity 조회 시 관련된 Account, Comment 등 자식 엔티티들이 LAZY 로딩되면서 각 엔티티마다 추가 쿼리 발생. 사용자 1명 조회 → N개의 추가 쿼리 실행 (N+1 문제)로 인한 성능 저하.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-strategy"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
+                        <p class="impl-description-text"><strong>@EntityGraph</strong> 어노테이션을 사용하여 Repository 메서드에 원하는 연관 엔티티를 명시. JPA가 자동으로 한 번의 쿼리에 관련 데이터를 함께 로드하여 불필요한 추가 쿼리 제거.</p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-result"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
+                        <p class="impl-description-text">데이터베이스 쿼리를 N+1에서 1로 감소. API 응답 속도 개선으로 사용자 경험 향상. 간단한 설정만으로 성능 최적화 달성.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-container">
+                    <div class="metric-card-database">
+                        <p class="metric-label">쿼리 감소</p>
+                        <p class="metric-value-database">N+1 → 1</p>
+                    </div>
+                    <div class="metric-card-database">
+                        <p class="metric-label">응답속도</p>
+                        <p class="metric-value-database">약 70% 개선</p>
+                    </div>
+                    <div class="metric-card-database">
+                        <p class="metric-label">구현난이도</p>
+                        <p class="metric-value-database">쉬움</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trouble-case-concurrency fade-in">
+                <div class="trouble-header">
+                    <span class="trouble-header-badge-concurrency">CONCURRENCY CONTROL</span>
+                    <h4 class="trouble-header-title">동시성 제어 (낙관적 잠금 @Version)</h4>
+                </div>
+
+                <div class="trouble-grid">
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-problem"><i class="fas fa-exclamation-triangle"></i> 문제인식 (Problem)</h5>
+                        <p class="impl-description-text">
+                            <strong>문제 1: Race Condition</strong> - 회원가입 시 이메일 중복 체크와 저장 사이에 동시 요청이 들어오면 같은 이메일로 중복 가입 가능.
+                            <br><strong>문제 2: Lost Update</strong> - 사용자 정보 수정 시 동시에 여러 요청이 오면 먼저 업데이트된 내용이 나중 요청으로 덮어씌워져 데이터 손실 발생.
+                        </p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-strategy"><i class="fas fa-lightbulb"></i> 해결전략 (Strategy)</h5>
+                        <p class="impl-description-text">
+                            <strong>회원가입:</strong> DB의 UNIQUE 제약조건 + 예외 처리로 2중 방어.
+                            <br><strong>사용자 정보 수정:</strong> <strong>@Version</strong> 어노테이션으로 낙관적 잠금(Optimistic Lock) 적용. JPA가 자동으로 버전을 증가시키고, 동시 수정 감지 시 예외 발생하여 안전한 업데이트 보장.
+                        </p>
+                    </div>
+                    <div class="trouble-card">
+                        <h5 class="trouble-card-title-result"><i class="fas fa-check-circle"></i> 성과요약 (Result)</h5>
+                        <p class="impl-description-text">다중 인스턴스 환경에서도 안전한 동시성 제어 구현. 데이터 정합성을 보장하면서도 복잡한 락 메커니즘 없이 간단한 어노테이션으로 해결.</p>
+                    </div>
+                </div>
+
+                <div class="metrics-container">
+                    <div class="metric-card-concurrency">
+                        <p class="metric-label">구현 난이도</p>
+                        <p class="metric-value-concurrency">매우 낮음</p>
+                    </div>
+                    <div class="metric-card-concurrency">
+                        <p class="metric-label">데이터 정합성</p>
+                        <p class="metric-value-concurrency">100% 보장</p>
+                    </div>
+                    <div class="metric-card-concurrency">
+                        <p class="metric-label">확장성</p>
+                        <p class="metric-value-concurrency">다중 인스턴스</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="trouble-case-devops fade-in">
                 <div class="trouble-header">
                     <span class="trouble-header-badge-devops">DEVOPS</span>
@@ -312,9 +392,94 @@
             <h3 class="section-title-implementation">
                 <i class="fas fa-code"></i> Core Code Implementation
             </h3>
-            
+
 
             <div class="implementation-section">
+                <div class="impl-card fade-in">
+                    <h4><i class="fas fa-database"></i> N+1 해결 - @EntityGraph</h4>
+                    <p class="impl-description">@EntityGraph 어노테이션으로 한 번의 쿼리에 관련 엔티티를 함께 로드</p>
+                    <pre><code class="language-java">// Repository에 @EntityGraph 추가
+@Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    @EntityGraph(attributePaths = {"accounts", "comments"})
+    Optional&lt;User&gt; findByIdWithRelations(Long userId);
+}
+
+// Service에서 사용
+@Service
+public class UserService {
+    @Autowired
+    private UserRepository userRepository;
+
+    public User getUserWithRelations(Long userId) {
+        return userRepository.findByIdWithRelations(userId)
+            .orElseThrow(() -> new UserNotFoundException(
+                "사용자를 찾을 수 없습니다"));
+    }
+}
+
+// 사용 예시
+// userId로 조회하면 @EntityGraph가 자동으로
+// User + accounts + comments를 한 번의 쿼리로 로드
+User user = userService.getUserWithRelations(1L);</code></pre>
+                </div>
+
+                <div class="impl-card fade-in">
+                    <h4><i class="fas fa-lock"></i> 동시성 제어 - 낙관적 잠금 (@Version)</h4>
+                    <p class="impl-description">@Version으로 낙관적 잠금 구현. 동시 수정 감지 시 자동으로 예외 발생</p>
+                    <pre><code class="language-java">// 1. Entity에 @Version 추가
+@Entity
+public class User {
+    @Id
+    private Long id;
+
+    @Column(unique = true)
+    private String email;
+    private String nickname;
+    private String password;
+
+    @Version  // ← 낙관적 잠금 활성화
+    private Long version;
+}
+
+// 2. Service에서 사용
+@Service
+public class UserService {
+    @Autowired
+    private UserRepository userRepository;
+
+    // 사용자 정보 수정 - @Transactional만으로 동시성 제어
+    @Transactional
+    public void updateMe(Long userId, UpdateRequestDto dto) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new
+                UserNotFoundException("사용자를 찾을 수 없습니다"));
+
+        // 데이터 수정
+        user.setNickname(dto.getNickname());
+        user.setPassword(dto.getNewPassword());
+        // JPA @Version이 자동으로 동시성 제어
+        // 동시 수정 감지 시 OptimisticLockingFailureException 발생
+    }
+
+    // 회원가입 - DB 제약조건 + 예외 처리로 2중 방어
+    @Transactional
+    public void signup(SignupRequestDto dto) {
+        try {
+            User user = new User(
+                dto.getEmail(),
+                dto.getPassword(),
+                dto.getNickname()
+            );
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new EmailAlreadyExistsException(
+                "이미 가입된 이메일입니다");
+        }
+    }
+}</code></pre>
+                </div>
+
                 <div class="impl-card fade-in">
                     <h4><i class="fas fa-key"></i> JWT 토큰 생성</h4>
                     <p class="impl-description">JwtUtil.createAccessToken(userId, ...)에서 userId만 Claim에 담음</p>
